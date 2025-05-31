@@ -1,32 +1,59 @@
 #include <stdio.h>
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+int main(void) {
 
-int main() {
-    // Nível Novato - Movimentação das Peças
-    // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
 
-    // Implementação de Movimentação do Bispo
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
+    int bispoX,bispoY,rainhaX,rainhaY,torreX,torreY,cont, escolha; //VARIAVEIS DO PROJETO
+    do {
+        //DEFINIÇÃO DA ESCOLHA DE MOVIMENTAÇÃO DA PEÇA
+        printf("QUAL PECA DESEJA MOVIMENTAR?\n\n");
+        printf("1.Bispo\n2.Torre\n3.Rainha\n4.Sair\n\n");
+        scanf("%i",&escolha);
+        printf("\n");
 
-    // Implementação de Movimentação da Torre
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Torre para a direita.
-
-    // Implementação de Movimentação da Rainha
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
-
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
-
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
-
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
-
-    return 0;
+        //MOVIMENTAÇÃO DAS PEÇAS
+        switch (escolha) {
+            case 1: { //CASOS DE MOVIMENTAÇÃO: BISPO
+                bispoX,bispoY = 0;
+                cont = 1;
+                while (cont != 6) {
+                    printf("POSICAO BISPO (%i): X - %i / Y - %i\n", cont, bispoX, bispoY);
+                    bispoX++;
+                    bispoY++;
+                    cont++;
+                }
+                printf("\n");
+                break;
+            }
+            case 2: { //CASOS DE MOVIMENTAÇÃO: TORRE
+                torreX = 0;
+                torreY = 0;
+                cont = 1;
+                while (cont != 6) {
+                    printf("POSICAO TORRE (%i): X - %i / Y - %i\n", cont, torreX, torreY);
+                    torreX++;
+                    cont++;
+                }
+                printf("\n");
+                break;
+            }
+            case 3: { //CASOS DE MOVIMENTAÇÃO: RAINHA
+                rainhaX = 8;
+                rainhaY = 8;
+                for (cont = 1; cont <= 8; cont++) {
+                    printf("POSICAO RAINHA (%i): X - %i / Y - %i\n", cont, rainhaX, rainhaY);
+                    rainhaX--;
+                }
+                printf("\n");
+                break;
+            }
+            case 4: { //CASOS DE MOVIMENTAÇÃO: SAIDA DO PROGRAMA
+                printf("Obrigado por jogar!");
+                printf("\n");
+                break;
+            }
+            default: //CASOS DE MOVIMENTAÇÃO: OPCAO INVALIDA
+                printf("Esse opcao nao e valida");
+        }
+    } while (escolha != 4);
 }
