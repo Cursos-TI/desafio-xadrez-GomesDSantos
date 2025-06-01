@@ -1,10 +1,17 @@
 #include <stdio.h>
 
+int cavaloP(void);
+int torreP(void);
+int bispoP(void);
+int rainhaP(void);
+int mov(const int movX, const int movY, const int cont);
+
 int main(void) {
 
-    int bispoX,bispoY,rainhaX,rainhaY,torreX,torreY,cavaloX,cavaloY,cont,escolha; //VARIAVEIS DO PROJETO
+    int escolha = 0;
     do {
         //DEFINIÇÃO DA ESCOLHA DE MOVIMENTAÇÃO DA PEÇA
+        int escolha = 0;
         printf("QUAL PECA DESEJA MOVIMENTAR?\n\n");
         printf("1.Bispo\n2.Torre\n3.Rainha\n4.Cavalo\n5.sair\n\n");
         scanf("%i",&escolha);
@@ -13,78 +20,21 @@ int main(void) {
         //MOVIMENTAÇÃO DAS PEÇAS
         switch (escolha) {
             case 1: { //CASOS DE MOVIMENTAÇÃO: BISPO
-                bispoX,bispoY = 0;
-                cont = 1;
-                while (cont != 6) {
-                    if (cont == 1) {
-                        printf("POSICAO BISPO (%i): X - %i / Y - %i = Padrao\n", cont, bispoX, bispoY);
-                        cont++;
-                    }
-                    else if (cont != 6) {
-                        bispoX++;
-                        printf("POSICAO BISPO (%i): X - %i / Y - %i = Direita\n", cont, bispoX, bispoY);
-                        bispoY++;
-                        printf("POSICAO BISPO (%i): X - %i / Y - %i = Cima\n", cont, bispoX, bispoY);
-                        cont++;
-                    }
-                }
-                printf("\n");
+                bispoP();
                 break;
             }
             case 2: { //CASOS DE MOVIMENTAÇÃO: TORRE
-                torreX = 0;
-                torreY = 0;
-                cont = 1;
-                while (cont != 6) {
-                    if (cont == 1) {
-                        printf("POSICAO TORRE (%i): X - %i / Y - %i = Padrao\n", cont, torreX, torreY);
-                        cont++;
-                    }
-                    else if (cont != 6) {
-                        torreX++;
-                        printf("POSICAO TORRE (%i): X - %i / Y - %i = Direita\n", cont, torreX, torreY);
-                        cont++;
-                    }
-                }
-                printf("\n");
+                torreP();
                 break;
             }
             case 3: { //CASOS DE MOVIMENTAÇÃO: RAINHA
-                rainhaX = 8;
-                rainhaY = 8;
-                for (cont = 1; cont <= 9; cont++) {
-                    if (cont == 1) {
-                        printf("POSICAO RAINHA (%i): X - %i / Y - %i = Padrao\n", cont, rainhaX, rainhaY);
-                    }
-                    else if (cont != 9) {
-                        rainhaX--;
-                        printf("POSICAO RAINHA (%i): X - %i / Y - %i = Esquerda\n", cont, rainhaX, rainhaY);
-                    }
-                }
-                printf("\n");
+                rainhaP();
                 break;
             }
-            case 4: {
-                cavaloX = 5;
-                cavaloY = 5;
-                for (cont = 1; cont <= 5; cont++) {
-                    if (cont == 1) {
-                        printf("POSICAO CAVALO (%i): X - %i / Y - %i = Padrao\n", cont, cavaloX, cavaloY);
-                    }
-                    else if (cont <= 3) {
-                        cavaloY--;
-                        printf("POSICAO CAVALO (%i): X - %i / Y - %i = Baixo\n", cont, cavaloX, cavaloY);
-                    }
-                    else if (cont > 3) {
-                        cavaloX--;
-                        printf("POSICAO CAVALO (%i): X - %i / Y - %i = Esquerda\n", cont, cavaloX, cavaloY);
-                        cont++;
-                    }
-                }
-                printf("\n");
+            case 4: { //CASOS DE MOVIMENTAÇÃO: CAVALO
+                cavaloP();
                 break;
             }
-
             case 5: { //CASOS DE MOVIMENTAÇÃO: SAIDA DO PROGRAMA
                 printf("Obrigado por jogar!");
                 printf("\n");
@@ -97,3 +47,89 @@ int main(void) {
         }
     } while (escolha != 5);
 }
+
+int cavaloP(void) {
+    mov(2,1,3);
+    printf("\n");
+    return 0;
+}
+
+int rainhaP(void) {
+    mov(-8,0,8);
+    printf("\n");
+    return 0;
+}
+
+int torreP(void) {
+    mov(5,0,5);
+    printf("\n");
+    return 0;
+}
+
+int bispoP(void) {
+    mov(5,5,6);
+    printf("\n");
+    return 0;
+    }
+
+int mov(const int movX, const int movY, const int cont) {
+    //VARIAVEIS DA FUNÇÃO
+    int eixoX = 0;
+    int eixoY = 0;
+    int contInt = 0;
+    int control = 0;
+    //LOOP DE MOVIMENTAÇÃO
+    while (contInt != cont || control != 1) {
+        if (contInt == 0) {
+            printf("POSICAO = (%i): X - %i / Y - %i = Padrao\n", contInt, eixoX, eixoY);
+            if (movX > 0) {
+                contInt++;
+            }
+            else {
+                contInt--;
+            }
+        }
+        else if (movX > 0) {
+            while (eixoX != movX) {
+                ++eixoX;
+                printf("POSICAO = (%i): X - %i = Direita\n", contInt, eixoX);
+                contInt++;
+                if (eixoX == movX) {
+                    break;
+                }
+            }
+            contInt = 1;
+            while (eixoY != movY) {
+                eixoY++;
+                printf("POSICAO = (%i): Y - %i = Cima\n", contInt, eixoY);
+                contInt++;
+                if (eixoY == movY) {
+                    break;
+                }
+            }
+            control += 1;
+        }
+        if (movX < 0) {
+            while (eixoX != movX) {
+                --eixoX;
+                printf("POSICAO = (%i): X - %i = Esquerda\n", (contInt * -1), eixoX);
+                contInt--;
+                if (eixoX == movX) {
+                    break;
+                }
+            }
+            contInt = 1;
+            while (eixoY != movY) {
+                --eixoY;
+                printf("POSICAO = (%i): Y - %i = Baixo\n", (contInt * -1), eixoY);
+                contInt--;
+                if (movY == eixoY) {
+                    break;
+                }
+            }
+            control += 1;
+        }
+    }
+    return 0;
+}
+
